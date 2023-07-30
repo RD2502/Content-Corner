@@ -1,7 +1,6 @@
 const User=require('../models/userModel.js');
 const Post=require('../models/postModel.js');
 const ErrorResponse=require('../utils/errorResponse.js')
-const sendEmail = require("../utils/sendEmail.js");
 const crypto = require("crypto");
 const cloudinary=require('../utils/cloudinary.js')
 exports.signup=async(req,res,next)=>{
