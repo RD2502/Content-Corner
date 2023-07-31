@@ -1,11 +1,16 @@
 const express=require("express");
 const app=express()
+const path=require('path')
 const mongoose=require("mongoose")
 const morgan=require("morgan")
 const bodyParser=require("body-parser")
 require("dotenv").config()
 var cors=require('cors')
 var cookieParser=require('cookie-parser')
+app.use(express.static(path.join(__dirname,'./client/build')))
+app.get('*',function(req,res){
+  res.sendFile()
+})
 const authRoutes=require('./routes/authRoutes.js')
 const postRoutes=require('./routes/postRoutes.js')
 
@@ -28,8 +33,9 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(cors());
 
-app.use('/api',authRoutes);
-app.use('/api',postRoutes);
+app.use('https://content-corner.onrender/api',authRoutes);
+app.use('https://content-corner.onrender/api',postRoutes);
+
 
 
 app.use(errorHandler)
