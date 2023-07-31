@@ -7,7 +7,7 @@ const bodyParser=require("body-parser")
 require("dotenv").config()
 var cors=require('cors')
 var cookieParser=require('cookie-parser')
-app.use(express.static(path.join(__dirname,'./client/build')))
+app.use(express.static(path.join(__dirname,'./frontend/build')))
 app.get('*',function(req,res){
   res.sendFile()
 })
