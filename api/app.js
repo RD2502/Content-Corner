@@ -9,7 +9,7 @@ var cors=require('cors')
 var cookieParser=require('cookie-parser')
 app.use(express.static(path.join(__dirname,'./frontend/build')))
 app.get('*',function(req,res){
-  res.sendFile()
+  res.sendFile(path.join(__dirname,'./frontend/build/index.html'))
 })
 const authRoutes=require('./routes/authRoutes.js')
 const postRoutes=require('./routes/postRoutes.js')
