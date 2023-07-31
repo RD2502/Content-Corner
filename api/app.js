@@ -28,8 +28,8 @@ app.use(bodyParser.urlencoded({
 app.use(cookieParser());
 app.use(cors());
 
-app.use('/api',authRoutes);
-app.use('/api',postRoutes);
+app.use('https://content-corner.onrender/api',authRoutes);
+app.use('https://content-corner.onrender/api',postRoutes);
 
 
 app.use(errorHandler)
