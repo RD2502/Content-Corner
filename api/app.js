@@ -7,15 +7,7 @@ require("dotenv").config()
 var cors=require('cors')
 app.options('*', cors());
 const corsOptions = {
-credentials: true,
-origin: (origin, callback) => {
-   if (whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-     } else {
-       callback(new Error('Not allowed by CORS'));
-    }
-  },
- };
+credentials: true};
 var cookieParser=require('cookie-parser')
 const authRoutes=require('./routes/authRoutes.js')
 const postRoutes=require('./routes/postRoutes.js')
