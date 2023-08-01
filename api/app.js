@@ -5,9 +5,6 @@ const morgan=require("morgan")
 const bodyParser=require("body-parser")
 require("dotenv").config()
 var cors=require('cors')
-app.options('*', cors());
-const corsOptions = {
-credentials: true};
 var cookieParser=require('cookie-parser')
 const authRoutes=require('./routes/authRoutes.js')
 const postRoutes=require('./routes/postRoutes.js')
