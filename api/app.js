@@ -5,7 +5,6 @@ const morgan=require("morgan")
 const bodyParser=require("body-parser")
 require("dotenv").config()
 var cors=require('cors')
-const whitelist = ['http://localhost:3000', 'https://64c8e2a8733b396515cc7d0b--dashing-rabanadas-023890.netlify.app/'];
 app.options('*', cors());
 const corsOptions = {
 credentials: true,
@@ -44,7 +43,7 @@ mongoose.connect(process.env.DATABASE, {
     .then(() => console.log("DB connected"))
     .catch((err) => console.log(err));
 
-//app.use(morgan('dev'));
+app.use(morgan('dev'));
 app.use(bodyParser.json({ limit: "5mb" }));
 app.use(bodyParser.urlencoded({
   limit: "5mb",
