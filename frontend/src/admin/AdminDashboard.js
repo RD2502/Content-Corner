@@ -9,16 +9,19 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { toast } from 'react-toastify';
-
+import { base } from '../utils/config';
+import Loader from '../components/Loader';
 
 const AdminDashboard = () => {
 
     const [posts, setPosts] = useState([]);
-
+    const [loading,setLoading]=useState(true);
     const displayPost = async () => {
+        setLoading(true)
         try {
-            const { data } = await axios.get('/api/post/showPost');
+            const { data } = await axios.get(`${base}/api/post/showPost`,{ withCredentials: true});
             setPosts(data.posts);
+            setLoading(false)
         } catch (error) {
             console.log(error);
         }
@@ -33,12 +36,14 @@ const AdminDashboard = () => {
     const deletePostById = async (e, id) => {
         // console.log(id)
         if (window.confirm("Are you sure you want to delete this post?")) {
+            setLoading(true)
             try {
-                const { data } = await axios.delete(`/api/delete/post/${id}`);
+                const { data } = await axios.delete(`${base}/api/delete/post/${id}`,{ withCredentials: true});
                 if (data.success === true) {
                     toast.success(data.message);
                     displayPost();
                 }
+                setLoading(false)
             } catch (error) {
                 console.log(error);
                 toast.error(error);
@@ -72,14 +77,6 @@ const AdminDashboard = () => {
 
         },
         {
-            field: 'likes',
-            headerName: 'Likes',
-            width: 150,
-            renderCell: (params) => (
-                params.row.likes.length
-            )
-        },
-        {
             field: 'comments',
             headerName: 'Comments',
             width: 150,
@@ -107,7 +104,7 @@ const AdminDashboard = () => {
             width: 100,
             renderCell: (value) => (
                 <Box sx={{ display: "flex", justifyContent: "space-between", width: "170px" }}>
-                    <Link to={`/admin/post/edit/${value.row._id}`}>
+                    <Link to={`/post/edit/${value.row._id}`}>
                         <IconButton aria-label="edit" >
                             <EditIcon sx={{ color: '#1976d2' }} />
                         </IconButton>
@@ -123,13 +120,14 @@ const AdminDashboard = () => {
 
 
     return (
+        loading?<Loader/>:
         <Box >
 
             <Typography variant="h4" sx={{ color: "black", pb: 3 }}>
                 Posts
             </Typography>
             <Box sx={{ pb: 2, display: "flex", justifyContent: "right" }}>
-                <Button variant='contained' color="success" startIcon={<AddIcon />}><Link style={{ color: 'white', textDecoration: 'none' }} to='/admin/post/create'>Create Post</Link> </Button>
+                <Button variant='contained' color="success" startIcon={<AddIcon />}><Link style={{ color: 'white', textDecoration: 'none' }} to='/post/create'>Create Post</Link> </Button>
             </Box>
             <Paper sx={{ bgcolor: "white" }} >
 

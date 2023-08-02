@@ -1,20 +1,21 @@
 const express=require("express");
 const app=express()
-const path=require('path')
 const mongoose=require("mongoose")
 const morgan=require("morgan")
 const bodyParser=require("body-parser")
 require("dotenv").config()
 var cors=require('cors')
 var cookieParser=require('cookie-parser')
-app.use(express.static(path.join(__dirname,'./frontend/build')))
-app.get('*',function(req,res){
-  res.sendFile(path.join(__dirname,'./frontend/build/index.html'))
-})
 const authRoutes=require('./routes/authRoutes.js')
 const postRoutes=require('./routes/postRoutes.js')
 
-const errorHandler=require('./middleware/error.js')
+const errorHandler=require('./middleware/error.js');
+const corsOptions = {
+  origin:'*',
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus:200,
+};
+
 mongoose.connect(process.env.DATABASE, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -31,14 +32,14 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(cookieParser());
-app.use(cors());
+app.use(cors(corsOptions));
 
 app.use('/api',authRoutes);
 app.use('/api',postRoutes);
 
 
 app.use(errorHandler)
-const port=process.env.PORT||4000
-app.listen(port,()=>{
-    console.log(`Server listening on port${port}`);
+const PORT=process.env.PORT||4000
+app.listen(PORT,()=>{
+    console.log(`Server listening on port${PORT}`);
 })

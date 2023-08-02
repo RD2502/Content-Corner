@@ -9,7 +9,8 @@ import { modules } from '../components/moduleToolbar';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-
+import { base } from '../utils/config';
+import Loader from '../components/Loader';
 
 
 const validationSchema = yup.object({
@@ -30,7 +31,7 @@ const EditProfile = () => {
     const{userInfo}=useSelector(state=>state.signIn);
     const [name, setname] = useState('');
     const [email, setemail] = useState('');
-
+    const [loading,setLoading]=useState(true);
     const navigate = useNavigate();
 
     const {
@@ -59,11 +60,12 @@ const EditProfile = () => {
 
     //show post by Id
     const singleProfileById = async () => {
-        // console.log(id)
+        setLoading(true);
         try {
-            const { data } = await axios.get('/api/me');
+            const { data } = await axios.get(`${base}/api/me`,{ withCredentials: true});
             setname(data.user.name);
             setemail(data.user.email);
+            setLoading(false);
         } catch (error) {
             console.log(error);
             toast.error(error);
@@ -75,12 +77,13 @@ const EditProfile = () => {
     }, [])
 
     const updateUser = async (values) => {
+        setLoading(true);
         try {
-            const { data } = await axios.put('/api/updateProfile', values);
+            const { data } = await axios.put(`${base}/api/updateProfile`, values,{ withCredentials: true});
             if (data.success === true) {
                 toast.success('Profile updated');
             userInfo&&userInfo.role=='admin'?navigate('/admin/dashboard'):navigate('/user/dashboard')
-                
+            setLoading(false);    
             }
         } catch (error) {
             console.log(error);
@@ -89,6 +92,7 @@ const EditProfile = () => {
     }
 
     return (
+        loading?<Loader/>:
         <>
             <Box sx={{ bgcolor: "white", padding: "20px 200px" }}>
                 <Typography variant='h5' sx={{ pb: 4 }}> Update Profile  </Typography>

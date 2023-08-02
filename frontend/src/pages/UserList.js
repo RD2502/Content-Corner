@@ -9,16 +9,21 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { toast } from 'react-toastify';
+import { base } from '../utils/config';
+import Loader from '../components/Loader';
 
 
 const Userlist = () => {
 
     const [users, setUsers] = useState([]);
-
+    const [loading,setLoading]=useState(true)
     const displayUser = async () => {
+        setLoading(true);
         try {
-            const { data } = await axios.get('/api/showUsers');
+            const { data } = await axios.get(`${base}/api/showUsers`,{ withCredentials: true});
             setUsers(data.users);
+            console.log(data.users);
+            setLoading(false);
         } catch (error) {
             console.log(error);
         }
@@ -33,12 +38,14 @@ const Userlist = () => {
     const deleteUserById = async (e, id) => {
         // console.log(id)
         if (window.confirm("Are you sure you want to delete this user?")) {
+            setLoading(true);
             try {
-                const { data } = await axios.delete(`/api/admin/userdelete/${id}`);
+                const { data } = await axios.delete(`${base}/api/admin/userdelete/${id}`,{ withCredentials: true});
                 if (data.success === true) {
                     toast.success(data.message);
                     displayUser();
                 }
+                setLoading(false);
             } catch (error) {
                 console.log(error);
                 toast.error(error);
@@ -83,6 +90,8 @@ const Userlist = () => {
 
 
     return (
+        loading?<Loader/>:
+        
         <Box >
 
             <Typography variant="h4" sx={{ color: "black", pb: 3 }}>
@@ -92,6 +101,7 @@ const Userlist = () => {
             <Paper sx={{ bgcolor: "white" }} >
 
                 <Box sx={{ height: 400, width: '100%' }}>
+                    
                     <DataGrid
                         getRowId={(row) => row._id}
                         sx={{

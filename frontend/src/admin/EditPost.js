@@ -10,6 +10,8 @@ import 'react-quill/dist/quill.snow.css';
 import { modules } from '../components/moduleToolbar';
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { base } from '../utils/config';
+import Loader from '../components/Loader';
 
 
 
@@ -33,7 +35,7 @@ const EditPost = () => {
     const [content, setContent] = useState('');
     const [image, setImage] = useState('');
     const [imagePreview, setImagePreview] = useState('');
-
+    const [loading,setLoading]=useState(true);
     const navigate = useNavigate();
 
     const {
@@ -65,11 +67,13 @@ const EditPost = () => {
     const singlePostById = async () => {
         // console.log(id)
         try {
-            const { data } = await axios.get(`/api/post/${id}`);
+            setLoading(true);
+            const { data } = await axios.get(`${base}/api/post/${id}`,{ withCredentials: true});
             setTitle(data.post.title);
             setContent(data.post.content);
             setImagePreview(data.post.image.url);
             console.log('single post admin', data.post)
+            setLoading(false);
 
         } catch (error) {
             console.log(error);
@@ -83,7 +87,7 @@ const EditPost = () => {
 
     const updatePost = async (values) => {
         try {
-            const { data } = await axios.put(`/api/update/post/${id}`, values);
+            const { data } = await axios.put(`${base}/api/update/post/${id}`, values,{ withCredentials: true});
             if (data.success === true) {
                 toast.success('post updated');
                 navigate('/admin/dashboard')
@@ -96,6 +100,7 @@ const EditPost = () => {
 
 
     return (
+        loading?<Loader/>:
         <>
             <Box sx={{ bgcolor: "white", padding: "20px 200px" }}>
                 <Typography variant='h5' sx={{ pb: 4 }}> Edit post  </Typography>

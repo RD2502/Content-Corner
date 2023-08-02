@@ -44,7 +44,7 @@ const LogUp = () => {
             //  alert(JSON.stringify(values, null, 2));
             dispatch(userSignupAction(values));
             actions.resetForm();
-            navigate("/");
+            navigate("/login");
         }
 
     })

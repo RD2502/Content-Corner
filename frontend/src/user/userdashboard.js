@@ -9,15 +9,13 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { toast } from 'react-toastify';
-import { useSelector } from 'react-redux';
-
-
+import { base } from '../utils/config';
 const UserDashboard = () => {
 
     const [posts, setPosts] = useState([]);
     const displayPost = async () => {
         try {
-            const { data } = await axios.get('/api/post/showPostById');
+            const { data } = await axios.get(`${base}/api/post/showPostById`,{withCredentials:true});
             setPosts(data.posts);
         } catch (error) {
             console.log(error);
@@ -31,10 +29,9 @@ const UserDashboard = () => {
 
     //delete post by Id
     const deletePostById = async (e, id) => {
-        // console.log(id)
         if (window.confirm("Are you sure you want to delete this post?")) {
             try {
-                const { data } = await axios.delete(`/api/delete/post/${id}`);
+                const { data } = await axios.delete(`${base}/api/delete/post/${id}`,{withCredentials:true});
                 if (data.success === true) {
                     toast.success("Post deleted successfully");
                     displayPost();
@@ -71,14 +68,7 @@ const UserDashboard = () => {
             )
 
         },
-        {
-            field: 'likes',
-            headerName: 'Likes',
-            width: 150,
-            renderCell: (params) => (
-                params.row.likes.length
-            )
-        },
+        
         {
             field: 'comments',
             headerName: 'Comments',

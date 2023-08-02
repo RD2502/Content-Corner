@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 import { userSignInAction } from '../redux/actions/userAction'
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { base } from '../utils/config';
 
 const validationSchema = yup.object({
     email: yup

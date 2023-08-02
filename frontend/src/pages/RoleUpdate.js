@@ -5,20 +5,19 @@ import axios from 'axios';
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-
+import { base } from '../utils/config';
 
 
 const validationSchema = yup.object({
     role: yup
         .string('Role')
-        .max(5, 'text content should havea maximum of 4 characters ')
+        .max(5, 'text content should have maximum of 4 characters ')
 });
 
 
 
 const Editrole = () => {
     const { id } = useParams();
-
     const navigate = useNavigate();
 
     const {
@@ -39,18 +38,21 @@ const Editrole = () => {
             updateUser(values);
             //alert(JSON.stringify(values, null, 2));
             actions.resetForm();
+        
         },
+
     });
 
 
     const updateUser = async (values) => {
         try {
-            const { data } = await axios.put(`/api/admin/role/${id}`, values);
+            const { data } = await axios.put(`${base}/api/admin/role/${id}`, values,{ withCredentials: true});
             if (data.success === true) {
                 toast.success('Role updated');
                 navigate('/admin/dashboard')
                 
             }
+            
         } catch (error) {
             console.log(error);
             toast.error(error.response.data.error);

@@ -17,6 +17,7 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
+import { base } from '../utils/config';
 //import image from '../images/blog.jpg'
 
 
@@ -29,50 +30,16 @@ const PostCard = ({
     image,
     content,
     comments,
-    likes,
     showPosts,
-    likesId
 }) => {
-
-    const { userInfo } = useSelector(state => state.signIn);
-
-    //add like
-    const addLike = async () => {
-        try {
-            const { data } = await axios.put(`/api/addlike/post/${id}`);
-            // console.log("likes", data.post);
-             if (data.success == true) {
-                 showPosts();
-             }
-        } catch (error) {
-            console.log(error.response.data.error);
-            toast.error(error.response.data.error)
-        }
-    }
-
-
-
-    //remove like
-    const removeLike = async () => {
-        try {
-            const { data } = await axios.put(`/api/removelike/post/${id}`);
-            // console.log("remove likes", data.post);
-             if (data.success == true) {
-                showPosts();
-             }
-        } catch (error) {
-            console.log(error.response.data.error);
-            toast.error(error.response.data.error)
-        }
-    }
 
 
     return (
-        <Card sx={{ maxWidth: 345 }}>
+        <Card sx={{ maxWidth: 500 }}>
             <CardHeader
                 avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                        R
+                        
                     </Avatar>
                 }
 
@@ -86,7 +53,7 @@ const PostCard = ({
                     component="img"
                     height="194"
                     image={image}
-                    alt="Paella dish"
+                    alt="img"
                 />
             </Link>
             <CardContent>
@@ -99,21 +66,7 @@ const PostCard = ({
             </CardContent>
             <CardActions >
                 <Box sx={{ width: '100%', display: 'flex', justifyContent: 'space-between' }}>
-                    <Box>
-
-                        {
-                            likesId.includes(userInfo && userInfo.id) ?
-                                <IconButton onClick={removeLike} aria-label="add to favorites">
-                                    <FavoriteIcon sx={{ color: 'red' }} />
-                                </IconButton>
-                                :
-                                <IconButton onClick={addLike} aria-label="add to favorites">
-                                    <FavoriteBorderIcon sx={{ color: 'red' }} />
-                                </IconButton>
-                        }
-
-                        {likes} Like(s)
-                    </Box>
+                    
                     <Box>
                         {comments}
                         <IconButton aria-label="comment">

@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { modules } from '../components/moduleToolbar.js';
-
+import { base } from '../utils/config.js';
 
 
 const validationSchema = yup.object({
@@ -54,7 +54,7 @@ const CreatePost = () => {
 
     const createNewPost = async (values) => {
         try {
-            const { data } = await axios.post('/api/post/create', values);
+            const { data } = await axios.post(`${base}/api/post/create`, values,{ withCredentials: true});
             toast.success('post created');
         } catch (error) {
             console.log(error);

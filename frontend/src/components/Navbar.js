@@ -17,6 +17,7 @@ import { userLogoutAction, userProfileAction } from '../redux/actions/userAction
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { base } from '../utils/config';
 
 
 
@@ -27,7 +28,7 @@ const Navbar = () => {
     const[name,setName]=useState('')
     const findname=async()=>{
         try {
-            const {data}=await axios.get('/api/me')
+            const {data}=await axios.get(`${base}/api/me`,{ withCredentials: true})
         console.log(data);
         setName(data.user.name)
         } catch (error) {
@@ -198,13 +199,13 @@ const Navbar = () => {
                         >
 
                         {userInfo && userInfo.role=='admin'?<><MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center"><Link style={{ textDecoration: "none" }} to="/admin/dashboard">Admin </Link></Typography>
+                                <Typography textAlign="center"><Link style={{ textDecoration: "none" }} to="/admin/dashboard">Admin panel </Link></Typography>
                             </MenuItem>
                             <MenuItem onClick={logOut}>
                                         <Typography textAlign="center" color='#8e67b3'>Log Out </Typography>
                                     </MenuItem></>
                             :userInfo && userInfo.role=='user'?<> <MenuItem onClick={handleCloseUserMenu}>
-                                <Typography textAlign="center"><Link style={{ textDecoration: "none" }} to="/user/dashboard">User </Link></Typography>
+                                <Typography textAlign="center"><Link style={{ textDecoration: "none" }} to="/user/dashboard">User panel</Link></Typography>
                             </MenuItem>
                             <MenuItem onClick={logOut}>
                                         <Typography textAlign="center" color='#8e67b3'>Log Out </Typography>

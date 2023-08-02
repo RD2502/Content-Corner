@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 import axios from 'axios';
 import moment from 'moment';
 import Loader from '../components/Loader';
-
+import { base } from '../utils/config';
 
 
 
@@ -23,7 +23,7 @@ const Home = () => {
     const showPosts = async () => {
         setLoading(true);
         try {
-            const { data } = await axios.get('/api/post/showPost');
+            const { data } = await axios.get(`${base}/api/post/showPost`);
             setPosts(data.posts);
             setLoading(false);
         } catch (error) {

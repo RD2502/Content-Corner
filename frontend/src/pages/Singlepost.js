@@ -24,12 +24,12 @@ import { useSelector } from 'react-redux';
 import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { toast } from 'react-toastify';
 import CommentList from '../components/CommentList';
-
+import { base } from '../utils/config';
 
 const SinglePost = () => {
 
 
-    const { userInfo } = useSelector(state => state.signIn);
+    const {userInfo} = useSelector((state) => state.signIn);
 
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');
@@ -47,7 +47,7 @@ const SinglePost = () => {
     const displaySinglePost = async () => {
         setLoading(true);
         try {
-            const { data } = await axios.get(`/api/post/${id}`);
+            const { data } = await axios.get(`${base}/api/post/${id}`);
             // console.log(data)
             setTitle(data.post.title);
             setContent(data.post.content);
@@ -69,7 +69,7 @@ const SinglePost = () => {
     const addComment = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.put(`/api/comment/post/${id}`, { comment });
+            const { data } = await axios.put(`${base}/api/comment/post/${id}`, { comment },{withCredentials:true});
             if (data.success === true) {
                 setComment('');
                 toast.success("comment added");
