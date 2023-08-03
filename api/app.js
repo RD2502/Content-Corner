@@ -11,7 +11,7 @@ const postRoutes=require('./routes/postRoutes.js');
 const errorHandler=require('./middleware/error.js');
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://monumental-cheesecake-904437. monumental-cheesecake-904437.netlify.app/:1 netlify.app");
+  res.setHeader("Access-Control-Allow-Origin", "https://monumental-cheesecake-904437.netlify.app");
 res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization')
 res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
 res.setHeader('Access-Control-Allow-Credentials', 'true')
