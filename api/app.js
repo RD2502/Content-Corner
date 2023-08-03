@@ -11,7 +11,7 @@ const postRoutes=require('./routes/postRoutes.js');
 const errorHandler=require('./middleware/error.js');
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", "https://64cb62c018119b4d538fd1ef--soft-malabi-0dd6c8.netlify.app/");
 res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization')
 res.setHeader('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
 res.setHeader('Access-Control-Allow-Credentials', 'true')
