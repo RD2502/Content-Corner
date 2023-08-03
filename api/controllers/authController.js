@@ -63,10 +63,7 @@ exports.showUser = async (req, res, next) => {
 }
 const sendTokenResponse = async (user, codeStatus, res) => {
     const token = await user.getJwtToken();
-    const options = { maxAge: 60 * 60 * 1000*24*5, httpOnly: true }
-    if (process.env.NODE_ENV === 'production') {
-        options.secure = true
-    }
+    const options = { maxAge: 60 * 60 * 1000*24*5}
     res
         .status(codeStatus)
         .cookie('token', token, options)
