@@ -7,17 +7,9 @@ require("dotenv").config()
 var cors=require('cors')
 var cookieParser=require('cookie-parser')
 const authRoutes=require('./routes/authRoutes.js')
-const postRoutes=require('./routes/postRoutes.js')
-
-<<<<<<< HEAD
+const postRoutes=require('./routes/postRoutes.js');
 const errorHandler=require('./middleware/error.js');
-const corsOptions = {
-  origin:'*',
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus:200,
-};
-=======
-const errorHandler=require('./middleware/error.js')
+
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization')
@@ -31,7 +23,6 @@ res.setHeader('Access-Control-Allow-Credentials', 'true')
 });
 
 mongoose.set("strictQuery", false);
->>>>>>> 80175e0015265f8e2ce6e74ac7697df825c0ffbd
 
 mongoose.connect(process.env.DATABASE, {
     useNewUrlParser: true,
@@ -49,10 +40,6 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(cookieParser());
-<<<<<<< HEAD
-app.use(cors(corsOptions));
-=======
->>>>>>> 80175e0015265f8e2ce6e74ac7697df825c0ffbd
 
 app.use('/api',authRoutes);
 app.use('/api',postRoutes);
