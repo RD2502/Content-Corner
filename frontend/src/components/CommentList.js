@@ -13,8 +13,7 @@ const CommentList = ({ name, text }) => {
             <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
                 <ListItem alignItems="flex-start">
                     <ListItemAvatar>
-                         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                         </Avatar>
+                          <Avatar alt="Remy Sharp" src="https://icons8.com/icon/85147/male-user" />
                     </ListItemAvatar>
                     <ListItemText
                         primary={name}
