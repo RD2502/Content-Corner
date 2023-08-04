@@ -56,7 +56,7 @@ const EditPost = () => {
         validationSchema: validationSchema,
         enableReinitialize: true,
         onSubmit: (values, actions) => {
-            setloading(true)
+            setLoading(true)
             updatePost(values);
         },
     });
@@ -89,7 +89,7 @@ const EditPost = () => {
             const { data } = await axios.put(`${base}/api/update/post/${id}`, values,{ withCredentials: true});
             if (data.success === true) {
                 toast.success('post updated');
-                 setloading(false)
+                 setLoading(false)
             }
         } catch (error) {
             console.log(error);
