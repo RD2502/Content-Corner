@@ -49,7 +49,8 @@ const CreatePost = () => {
         onSubmit: (values, actions) => {
             setloading(true);
             createNewPost(values);
-            navigate('/')
+            
+            
         },
     });
 
@@ -59,7 +60,9 @@ const CreatePost = () => {
     const createNewPost = async (values) => {
         try {
             const { data } = await axios.post(`${base}/api/post/create`, values,{ withCredentials: true});
+            setloading(false);
             toast.success('post created');
+            
         } catch (error) {
             console.log(error);
             toast.error(error);
