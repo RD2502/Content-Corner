@@ -1,4 +1,5 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
+import { useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Dropzone from 'react-dropzone'
@@ -9,6 +10,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { modules } from '../components/moduleToolbar.js';
 import { base } from '../utils/config.js';
+import Loader from '../components/Loader';
 
 
 const validationSchema = yup.object({
@@ -25,7 +27,7 @@ const validationSchema = yup.object({
 
 
 const CreatePost = () => {
-
+    const[loading,setloading]=useState(false)
     const {
         values,
         errors,
@@ -43,9 +45,8 @@ const CreatePost = () => {
 
         validationSchema: validationSchema,
         onSubmit: (values, actions) => {
+            setloading(true);
             createNewPost(values);
-            //alert(JSON.stringify(values, null, 2));
-            actions.resetForm();
         },
     });
 
@@ -64,6 +65,7 @@ const CreatePost = () => {
 
 
     return (
+        loading?<Loader/>:
         <>
             <Box sx={{ bgcolor: "white", padding: "20px 200px" }}>
                 <Typography variant='h5' sx={{ pb: 4 }}> Create post  </Typography>
