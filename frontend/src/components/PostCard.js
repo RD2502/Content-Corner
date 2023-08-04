@@ -24,6 +24,7 @@ import { base } from '../utils/config';
 
 
 const PostCard = ({
+    name,
     id,
     title,
     subheader,
@@ -76,6 +77,12 @@ const PostCard = ({
                 </Box>
 
             </CardActions>
+         <CardContent>
+                        <Typography variant="body2" color="text.secondary">
+                          - {name}
+                        </Typography>
+                        
+        </CardContent>
 
         </Card>
     );
