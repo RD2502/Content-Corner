@@ -47,6 +47,7 @@ const CreatePost = () => {
         onSubmit: (values, actions) => {
             setloading(true);
             createNewPost(values);
+            navigate('/')
         },
     });
 
