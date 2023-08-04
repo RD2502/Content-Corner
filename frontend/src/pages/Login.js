@@ -12,7 +12,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { base } from '../utils/config';
 import Loader from '../components/Loader';
-const[loading,setloading]=useState(true);
+
 const validationSchema = yup.object({
     email: yup
         .string('Enter your email')
