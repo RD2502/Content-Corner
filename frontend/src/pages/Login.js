@@ -1,5 +1,5 @@
 import { Avatar, Box} from '@mui/material'
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import LockClockOutlined from '@mui/icons-material/LockClockOutlined'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -11,7 +11,8 @@ import { userSignInAction } from '../redux/actions/userAction'
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import { base } from '../utils/config';
-
+import Loader from '../components/Loader';
+const[loading,setloading]=useState(true);
 const validationSchema = yup.object({
     email: yup
         .string('Enter your email')
@@ -50,7 +51,7 @@ const LogIn = () => {
         onSubmit: (values, actions) => {
             //  alert(JSON.stringify(values, null, 2));
             dispatch(userSignInAction(values));
-            actions.resetForm();
+            setloading(true);
         }
 
     })
