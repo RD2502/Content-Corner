@@ -1,6 +1,7 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
 import { useState } from 'react';
 import { useFormik } from 'formik';
+import {useNavigate} from 'react-router-dom';
 import * as yup from 'yup';
 import Dropzone from 'react-dropzone'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -28,6 +29,7 @@ const validationSchema = yup.object({
 
 const CreatePost = () => {
     const[loading,setloading]=useState(false)
+    const navigate=useNavigate();
     const {
         values,
         errors,
