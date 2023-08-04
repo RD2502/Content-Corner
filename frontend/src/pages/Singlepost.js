@@ -97,7 +97,7 @@ const SinglePost = () => {
                                     }
                                    title={title}
                                     subheader={moment(createdAt).format('MMMM DD, YYYY')}
-                                   <Typography>-{name}</Typography>
+                                   -{name}
                                 />
                                 <CardMedia
                                     component="img"
