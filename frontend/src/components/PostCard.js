@@ -74,15 +74,18 @@ const PostCard = ({
                             <CommentIcon />
                         </IconButton>
                     </Box>
-                </Box>
-
-            </CardActions>
-         <CardContent>
+                        <Box>
+                         <CardContent>
                         <Typography variant="body2" color="text.secondary">
                           - {name}
                         </Typography>
                         
-        </CardContent>
+                          </CardContent>
+                        </Box>
+                </Box>
+
+            </CardActions>
+        
 
         </Card>
     );
