@@ -37,9 +37,6 @@ const SinglePost = () => {
     const [loading, setLoading] = useState(false);
     const [comment, setComment] = useState('');
     const [comments, setComments] = useState([]);
-    const[name,setName]=useState('')
-
-
 
     const { id } = useParams();
     //fetch single post
@@ -48,7 +45,6 @@ const SinglePost = () => {
         try {
             const { data } = await axios.get(`${base}/api/post/${id}`);
             // console.log(data)
-            setName(data.post.postedBy.name)
             setTitle(data.post.title);
             setContent(data.post.content);
             setImage(data.post.image.url);
@@ -97,7 +93,6 @@ const SinglePost = () => {
                                     }
                                    title={title}
                                     subheader={moment(createdAt).format('MMMM DD, YYYY')}
-                                   -{name}
                                 />
                                 <CardMedia
                                     component="img"
