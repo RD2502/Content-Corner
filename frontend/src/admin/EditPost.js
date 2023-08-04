@@ -56,9 +56,8 @@ const EditPost = () => {
         validationSchema: validationSchema,
         enableReinitialize: true,
         onSubmit: (values, actions) => {
+            setloading(true)
             updatePost(values);
-            //alert(JSON.stringify(values, null, 2));
-            actions.resetForm();
         },
     });
 
@@ -72,7 +71,6 @@ const EditPost = () => {
             setTitle(data.post.title);
             setContent(data.post.content);
             setImagePreview(data.post.image.url);
-            console.log('single post admin', data.post)
             setLoading(false);
 
         } catch (error) {
@@ -87,10 +85,11 @@ const EditPost = () => {
 
     const updatePost = async (values) => {
         try {
+
             const { data } = await axios.put(`${base}/api/update/post/${id}`, values,{ withCredentials: true});
             if (data.success === true) {
                 toast.success('post updated');
-                navigate('/admin/dashboard')
+                 setloading(false)
             }
         } catch (error) {
             console.log(error);
