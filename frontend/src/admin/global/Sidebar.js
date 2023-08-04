@@ -28,7 +28,6 @@ const SidebarAdm = () => {
         dispatch(userLogoutAction());
         window.location.reload(true);
         setTimeout(() => {
-            toast.success("Logged out successfully!!")
             navigate('/');
         }, 500)
     }
