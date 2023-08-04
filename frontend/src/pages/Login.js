@@ -27,6 +27,7 @@ const validationSchema = yup.object({
 
 
 const LogIn = () => {
+    const[loading,setloading]=useState(true);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { isAuthenticated, userInfo } = useSelector(state => state.signIn);
