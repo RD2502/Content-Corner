@@ -11,7 +11,6 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import CommentIcon from '@mui/icons-material/Comment';
 import ShareIcon from '@mui/icons-material/Share';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { Box, Button, Divider } from '@mui/material';
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
@@ -38,7 +37,7 @@ const SinglePost = () => {
     const [loading, setLoading] = useState(false);
     const [comment, setComment] = useState('');
     const [comments, setComments] = useState([]);
-
+    const[name,setName]=useState('')
 
 
 
@@ -49,6 +48,7 @@ const SinglePost = () => {
         try {
             const { data } = await axios.get(`${base}/api/post/${id}`);
             // console.log(data)
+            setName(data.post.postedBy.name)
             setTitle(data.post.title);
             setContent(data.post.content);
             setImage(data.post.image.url);
@@ -93,16 +93,11 @@ const SinglePost = () => {
                                 <CardHeader
                                     avatar={
                                         <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                                            R
                                         </Avatar>
                                     }
-                                    action={
-                                        <IconButton aria-label="settings">
-                                            <MoreVertIcon />
-                                        </IconButton>
-                                    }
-                                    title={title}
+                                   title={title}
                                     subheader={moment(createdAt).format('MMMM DD, YYYY')}
+                                   <Typography>-{name}</Typography>
                                 />
                                 <CardMedia
                                     component="img"
