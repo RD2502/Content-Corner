@@ -27,7 +27,7 @@ const validationSchema = yup.object({
 
 
 const LogIn = () => {
-    const[loading,setloading]=useState(true);
+    const[loading,setloading]=useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { isAuthenticated, userInfo } = useSelector(state => state.signIn);
@@ -58,6 +58,7 @@ const LogIn = () => {
     })
 
     return (
+loading?<Loader/>:
         <>
             <Navbar />
 <Box sx={{ height: '81vh', display: "flex", alignItems: "center", justifyContent: "center", bgcolor: "primary.white" }}>
