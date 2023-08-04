@@ -50,9 +50,9 @@ const LogIn = () => {
         },
         validationSchema: validationSchema,
         onSubmit: (values, actions) => {
-            //  alert(JSON.stringify(values, null, 2));
+             setloading(true);
             dispatch(userSignInAction(values));
-            setloading(true);
+           
         }
 
     })
