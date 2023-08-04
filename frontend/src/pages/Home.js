@@ -74,6 +74,7 @@ const Home = () => {
                                       }).map((post, index) => (
                                         <Grid item xs={2} sm={4} md={4} key={index} >
                                             <PostCard
+                                                name={post.postedBy.name}
                                                 id={post._id}
                                                 title={post.title}
                                                 content={post.content}
